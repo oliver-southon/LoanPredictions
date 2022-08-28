@@ -1,1 +1,2 @@
-flask_app/venv
+flask_app/venv/
+secret_key.py

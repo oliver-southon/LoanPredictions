@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\User\OneDrive\Documents\RMIT\y2sem2\Case Studies in Data Science\assignments\LoanPredictions_Repo\venv"
+VIRTUAL_ENV="C:\Users\User\OneDrive\Documents\RMIT\y2sem2\Case Studies in Data Science\assignments\LoanPredictions_Repo\flask_app\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
