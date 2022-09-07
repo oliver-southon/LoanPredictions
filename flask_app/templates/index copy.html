@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block main %}
+
+<div class="container">
+    <!-- TITLE ROW -->
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <h1>Machine Learning with Loan Predictions <span class="lead small-font-size"><a href="{{ url_for('modelling') }}" class="link-secondary" target="_blank" style="text-decoration: none;"><i class="bi bi-journal-code"></i>  View the Model Building (Jupyter)</a></span></h1>
+            <hr>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <!-- SUBTEXT ROW -->
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <br>
+            <h5 style="font-size: 110%;">&nbsp&nbsp&nbsp>> To get started, input the below parameters of your choice and the model will predict if the loan is approved or not.</h5>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <!-- MODELS ROW -->
+    <div class="row">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="model1" data-bs-toggle="tab" data-bs-target="#model1" type="button" role="tab" aria-controls="model1" area-selected="true">Model1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="model2" data-bs-toggle="tab" data-bs-target="#model2" type="button" role="tab" aria-controls="model2" area-selected="true">Model2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="model3" data-bs-toggle="tab" data-bs-target="#model3" type="button" role="tab" aria-controls="model3" area-selected="true">Model3</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane show active" id="model1" role="tabpane1" area-labelledby="model1-tab">
+                <!-- FORM ROW -->
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5" >
+                                {% if not plot_url %}
+                                    <img src="../static/contact-form.png" class="img-fluid" alt="Responsive image" style="height: 100%; filter: invert(100%)">
+                                {% else %}
+                                    <img src="data:image/png;base64, {{ plot_url }}" class="img-fluid" alt="Responsive image" style="height: 100%">
+                                {% endif %}
+                            </div>
+                            <div class="col-sm-7">
+                                <form action="" method="POST" class="form" role="form">
+                                    {% if 'csrf_token' in form %}
+                                        {{form.csrf_token}}
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr1.label }}: <span><output for="attr1" id="attr1">{{ form.attr1.data }}</span></output></p>
+                                            {{ form.attr1(min=3.8, max=14.2, step=0.1, oninput="outputUpdate(value, 'attr1')") }}
+                                        </div>
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr2.label }}: <span><output for="attr2" id="attr2">{{ form.attr2.data }}</span></output></p>
+                                            {{ form.attr2(min=0.08, max=1.1, step=0.01, oninput="outputUpdate(value, 'attr2')") }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr3.label }}: <span><output for="attr3" id="attr3">{{ form.attr3.data }}</span></output></p>
+                                            {{ form.attr3(min=0.0, max=1.66, step=0.01, oninput="outputUpdate(value, 'attr3')") }}
+                                        </div>
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr4.label }}: <span><output for="attr4" id="attr4">{{ form.attr4.data }}</span></output></p>
+                                            {{ form.attr4(min=0.6, max=65.8, step=0.1, oninput="outputUpdate(value, 'attr4')") }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr5.label }}: <span><output for="attr5" id="attr5">{{ form.attr5.data }}</span></output></p>
+                                            {{ form.attr5(min=0.009, max=0.346, step=0.001, oninput="outputUpdate(value, 'attr5')") }}
+                                        </div>
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr6.label }}: <span><output for="attr6" id="attr6">{{ form.attr6.data }}</span></output></p>
+                                            {{ form.attr6(min=2.0, max=289.0, step=0.1, oninput="outputUpdate(value, 'attr6')") }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr7.label }}: <span><output for="attr7" id="attr7">{{ form.attr7.data }}</span></output></p>
+                                            {{ form.attr7(min=9.0, max=440.0, step=0.1, oninput="outputUpdate(value, 'attr7')") }}
+                                        </div>
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr8.label }}: <span><output for="attr8" id="attr8">{{ form.attr8.data }}</span></output></p>
+                                            {{ form.attr8(min=0.98711, max=1.03898, step=0.00001, oninput="outputUpdate(value, 'attr8')") }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr9.label }}: <span><output for="attr9" id="attr9">{{ form.attr9.data }}</span></output></p>
+                                            {{ form.attr9(min=2.72, max=3.82, step=0.01, oninput="outputUpdate(value, 'attr9')") }}
+                                        </div>
+                                        <div class="form-group col-md-6 text-center border">
+                                            <p class="mt-3">{{ form.attr10.label }}: <span><output for="attr10" id="attr10">{{ form.attr10.data }}</span></output></p>
+                                            {{ form.attr10(min=0.22, max=1.08, step=0.01, oninput="outputUpdate(value, 'attr10')") }}
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">  
+                                        <div class="form-group text-center border">
+                                            <p class="mt-3">{{ form.attr11.label }}: <span><output for="attr11" id="attr11">{{ form.attr11.data }}</span></output></p>
+                                            {{ form.attr11(min=8.0, max=14.2, step=0.1, oninput="outputUpdate(value, 'attr11')") }} 
+                                        </div>         
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3 container d-flex align-items-center justify-content-center">
+                                            {{form.submit(class="btn btn-primary mb-3")}}
+                                        </div>
+                                        <div class="col-9">
+                                            {% if result == 'yes' %}
+                                            <div class="alert alert-success" role="alert">
+                                                Loan approved!
+                                            </div>
+                                            {% elif result == 'no' %}
+                                            <div class="alert alert-danger" role="alert">
+                                                Loan denied!
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="tab-pane show active" id="model2" role="tabpane2" area-labelledby="model2-tab">
+                
+            </div>
+            <div class="tab-pane show active" id="model3" role="tabpane3" area-labelledby="model3-tab">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function outputUpdate(age, id) {
+    document.querySelector("[id=" + CSS.escape(id) + "]").value = age;
+}
+</script>
+{% endblock %}

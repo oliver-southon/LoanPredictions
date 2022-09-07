@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="row">
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-sm-5" >
+                {% if not plot_url %}
+                    <img src="../static/contact-form.png" class="img-fluid" alt="Responsive image" style="height: 100%; filter: invert(100%)">
+                {% else %}
+                    <img src="data:image/png;base64, {{ plot_url }}" class="img-fluid" alt="Responsive image" style="height: 100%">
+                {% endif %}
+            </div>
+            <div class="col-sm-7">
+                <form action="" method="POST" class="form" role="form">
+                    {% if 'csrf_token' in form %}
+                        {{form.csrf_token}}
+                    {% endif %}
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.f_acid.label }}: <span><output for="f_acid" id="f_acid">{{ form.f_acid.data }}</span></output></p>
+                            {{ form.f_acid(min=3.8, max=14.2, step=0.1, oninput="outputUpdate(value, 'f_acid')") }}
+                        </div>
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.v_acid.label }}: <span><output for="v_acid" id="v_acid">{{ form.v_acid.data }}</span></output></p>
+                            {{ form.v_acid(min=0.08, max=1.1, step=0.01, oninput="outputUpdate(value, 'v_acid')") }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.c_acid.label }}: <span><output for="c_acid" id="c_acid">{{ form.c_acid.data }}</span></output></p>
+                            {{ form.c_acid(min=0.0, max=1.66, step=0.01, oninput="outputUpdate(value, 'c_acid')") }}
+                        </div>
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.r_sugar.label }}: <span><output for="r_sugar" id="r_sugar">{{ form.r_sugar.data }}</span></output></p>
+                            {{ form.r_sugar(min=0.6, max=65.8, step=0.1, oninput="outputUpdate(value, 'r_sugar')") }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.chlorides.label }}: <span><output for="chlorides" id="chlorides">{{ form.chlorides.data }}</span></output></p>
+                            {{ form.chlorides(min=0.009, max=0.346, step=0.001, oninput="outputUpdate(value, 'chlorides')") }}
+                        </div>
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.fs_dioxide.label }}: <span><output for="fs_dioxide" id="fs_dioxide">{{ form.fs_dioxide.data }}</span></output></p>
+                            {{ form.fs_dioxide(min=2.0, max=289.0, step=0.1, oninput="outputUpdate(value, 'fs_dioxide')") }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.ts_dioxide.label }}: <span><output for="ts_dioxide" id="ts_dioxide">{{ form.ts_dioxide.data }}</span></output></p>
+                            {{ form.ts_dioxide(min=9.0, max=440.0, step=0.1, oninput="outputUpdate(value, 'ts_dioxide')") }}
+                        </div>
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.density.label }}: <span><output for="density" id="density">{{ form.density.data }}</span></output></p>
+                            {{ form.density(min=0.98711, max=1.03898, step=0.00001, oninput="outputUpdate(value, 'density')") }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.ph.label }}: <span><output for="ph" id="ph">{{ form.ph.data }}</span></output></p>
+                            {{ form.ph(min=2.72, max=3.82, step=0.01, oninput="outputUpdate(value, 'ph')") }}
+                        </div>
+                        <div class="form-group col-md-6 text-center border">
+                            <p class="mt-3">{{ form.sulphates.label }}: <span><output for="sulphates" id="sulphates">{{ form.sulphates.data }}</span></output></p>
+                            {{ form.sulphates(min=0.22, max=1.08, step=0.01, oninput="outputUpdate(value, 'sulphates')") }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">  
+                        <div class="form-group text-center border">
+                            <p class="mt-3">{{ form.alcohol.label }}: <span><output for="alcohol" id="alcohol">{{ form.alcohol.data }}</span></output></p>
+                            {{ form.alcohol(min=8.0, max=14.2, step=0.1, oninput="outputUpdate(value, 'alcohol')") }} 
+                        </div>         
+                    </div>
+                    <div class="row">
+                        <div class="col-3 container d-flex align-items-center justify-content-center">
+                            {{form.submit(class="btn btn-primary mb-3")}}
+                        </div>
+                        <div class="col-9">
+                            {% if result == 'yes' %}
+                            <div class="alert alert-success" role="alert">
+                                Loan approved!
+                            </div>
+                            {% elif result == 'no' %}
+                            <div class="alert alert-danger" role="alert">
+                                Loan denied!
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
