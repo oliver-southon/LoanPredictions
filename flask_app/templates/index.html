@@ -5,7 +5,11 @@
 <div class="container">
     <!-- TITLE ROW -->
     <div class="row">
-        <div class="col-sm-1"></div>
+        <div class="col-sm-1">
+            <p>
+                
+            </p>
+        </div>
         <div class="col-sm-10">
             <h1>Machine Learning with Loan Predictions <span class="lead small-font-size"><a href="{{ url_for('modelling') }}" class="link-secondary" target="_blank" style="text-decoration: none;"><i class="bi bi-journal-code"></i>  View the Model Building (Jupyter)</a></span></h1>
             <hr>
@@ -23,10 +27,12 @@
     <!-- ALERT ROW -->
 
     <div class="row">
-    {% if results.outcome == True %}
-    <h5 class="p-0"><div class="alert alert-success p-1" role="alert"><i class="bi bi-emoji-smile"></i>  Loan approved!</div></h5>
+    {% if results.outcome == "yes" %}
+    <h5 class="p-0"><div class="alert alert-success p-1" role="alert"><i class="bi bi-emoji-smile"></i>  Recommendation: Approve Loan<span style="font-weight: 400;"> -- {{results.total_approved}}/3 Models suggest to aprrove the loan</span></div></h5>
+    {% elif results.outcome == "maybe" %}
+    <h5 class="p-0"><div class="alert alert-warning p-1" role="alert"><i class="bi bi-emoji-smile"></i>  Recommendation: Undecided<span style="font-weight: 400;"> -- {{results.total_approved}}/3 Models suggest to aprrove the loan</span></div></h5>
     {% else %}
-    <h5 class="p-0"></h5><div class="alert alert-danger p-1"><i class="bi bi-emoji-frown"></i>  Loan denied!</div></h5>
+    <h5 class="p-0"></h5><div class="alert alert-danger p-1"><i class="bi bi-emoji-frown"></i>  Recommendation: Deny Loan<span style="font-weight: 400;"> -- {{results.total_approved}}/3 Models suggest to aprrove the loan</span></div></h5>
     {% endif %}
     </div>
 
@@ -35,24 +41,24 @@
     <div class="row">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-            {% if results.lr == True %}
-                <button class="nav-link active text-success" id="model1-tab" data-bs-toggle="tab" data-bs-target="#model1" type="button" role="tab" aria-controls="model1" aria-selected="true"><i class="bi bi-check-circle"></i>  Logistic Regression</button>
+            {% if results.xgb == True %}
+                <button class="nav-link active text-success" id="model1-tab" data-bs-toggle="tab" data-bs-target="#model1" type="button" role="tab" aria-controls="model1" aria-selected="true"><i class="bi bi-check-circle"></i>  XGBoost</button>
             {% else %}
-                <button class="nav-link active text-danger" id="model1-tab" data-bs-toggle="tab" data-bs-target="#model1" type="button" role="tab" aria-controls="model1" aria-selected="true"><i class="bi bi-x-circle"></i>  Logistic Regression</button>
+                <button class="nav-link active text-danger" id="model1-tab" data-bs-toggle="tab" data-bs-target="#model1" type="button" role="tab" aria-controls="model1" aria-selected="true"><i class="bi bi-x-circle"></i>  XGBoost</button>
             {% endif %}
             </li>
             <li class="nav-item" role="presentation">
-            {% if results.rfc == True %}
-                <button class="nav-link text-success" id="model2-tab" data-bs-toggle="tab" data-bs-target="#model2" type="button" role="tab" aria-controls="model2" aria-selected="false"><i class="bi bi-check-circle"></i>  Random Forest Classification</button>
+            {% if results.dt == True %}
+                <button class="nav-link text-success" id="model2-tab" data-bs-toggle="tab" data-bs-target="#model2" type="button" role="tab" aria-controls="model2" aria-selected="false"><i class="bi bi-check-circle"></i>  Decision Tree</button>
             {% else %}
-                <button class="nav-link text-danger" id="model2-tab" data-bs-toggle="tab" data-bs-target="#model2" type="button" role="tab" aria-controls="model2" aria-selected="false"><i class="bi bi-x-circle"></i>  Random Forest Classification</button>
+                <button class="nav-link text-danger" id="model2-tab" data-bs-toggle="tab" data-bs-target="#model2" type="button" role="tab" aria-controls="model2" aria-selected="false"><i class="bi bi-x-circle"></i>  Decision Tree</button>
             {% endif %}
             </li>
             <li class="nav-item" role="presentation">
-            {% if results.dtc == True %}
-                <button class="nav-link text-success" id="model3-tab" data-bs-toggle="tab" data-bs-target="#model3" type="button" role="tab" aria-controls="model3" aria-selected="false"><i class="bi bi-check-circle"></i>  Decision Tree Classifier</button>
+            {% if results.svm == True %}
+                <button class="nav-link text-success" id="model3-tab" data-bs-toggle="tab" data-bs-target="#model3" type="button" role="tab" aria-controls="model3" aria-selected="false"><i class="bi bi-check-circle"></i>  Support Vector Machine</button>
             {% else %}
-                <button class="nav-link text-danger" id="model3-tab" data-bs-toggle="tab" data-bs-target="#model3" type="button" role="tab" aria-controls="model3" aria-selected="false"><i class="bi bi-x-circle"></i>  Decision Tree Classifier</button>
+                <button class="nav-link text-danger" id="model3-tab" data-bs-toggle="tab" data-bs-target="#model3" type="button" role="tab" aria-controls="model3" aria-selected="false"><i class="bi bi-x-circle"></i>  Support Vector Machine</button>
             {% endif %}
             </li>
             <li class="nav-item ms-auto">
@@ -77,8 +83,6 @@
 </div>
 
 <script>
-function outputUpdate(age, id) {
-    document.querySelector("[id=" + CSS.escape(id) + "]").value = age;
-}
+
 </script>
 {% endblock %}

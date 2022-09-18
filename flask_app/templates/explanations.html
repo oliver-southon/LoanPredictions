@@ -4,22 +4,89 @@
 
 <div class="container">
     <!-- TITLE ROW -->
+    <h1 class="display-1 text-center">Global Explanations</h1>
+    <br>
+    <br>
     <div class="row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10">
-            <h1>Model Explanations Stuff</h1>
-            <br>
-            <h2>Model1</h2>
-            <p>Some text here...</p>
-            <h2>Model2</h2>
-            <p>Some text here...</p>
-            <h2>Model3</h2>
-            <p>Some text here...</p>
+        <div class="col-sm-7">
+            <img src="../../static/fig1.png" class="img-fluid p-2 border border-secondary" alt="Responsive image" style="height: 100%">   
+        </div>
+        <div class="col-sm-3">
+            <p>
+                To get an overview of which features are most important for a model, please look at figure 1. Features have been sorted by their impact magnitude on the model output. The colour represents the direction of impact for the feature values. For example, small values for External Risk Estimate are shown in red, meaning that low External Risk Estimate results in high model output. In our case, higher output means this user has higher possibility to default the loan repayment.
+            </p>
         </div>
         <div class="col-sm-1"></div>
     </div>
-
-
+    <div class="row">
+        <div class="cols-sm-1"></div>
+        <div class="col-sm-3">
+            <p>
+                Figure 2 shows each feature’s average impact on the model output. Again, we can see that the External Risk Estimate plays the most important role in the prediction.  
+            </p>
+        </div>
+        <div class="col-sm-7">
+            <img src="../../static/fig2.png" class="img-fluid p-2 border border-secondary" alt="Responsive image" style="height: 100%">   
+        </div>
+        <div class="cols-sm-1"></div>
+    </div>
+    <div class="row">
+        <br>
+        <p>
+            Figure 3 – 5 shows the partial dependence of the model output on each of the most important 3 features. 
+        </p>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="cols-sm-1"></div>
+        <div class="cols-m-10">
+            <div class="row">
+                <div class="col border">
+                    <img src="../../static/fig3.png" class="img-fluid p-2" alt="Responsive image" style="height: 100%">   
+                </div>
+                <div class="col border">
+                    <img src="../../static/fig4.png" class="img-fluid p-2" alt="Responsive image" style="height: 100%">   
+                </div>
+                <div class="col border">
+                    <img src="../../static/fig5.png" class="img-fluid p-2" alt="Responsive image" style="height: 100%">   
+                </div>
+            </div>
+        </div>
+        <div class="cols-sm-1"></div>
+    </div>
+    <div class="row border">
+        <div class="cols-sm-1"></div>
+        <div class="cols-m-10">
+            <div class="row pt-1">
+                <div class="col border-end">
+                    <h5>Figure 3</h5>
+                    <p>
+                        ExternalRiskEstimate
+                        If ExternalRiskEstimate < 80, the model output will tend to decrease steadily (i.e., default risk decrease)
+                        If ExternalRiskEstimate > 80, the model output will stay in a low range (i.e., default risk stays low)
+                    </p>
+                </div>
+                <div class="col border-start border-end">
+                    <h5>Figure 4</h5>
+                    <p>
+                        MSinceMostRecentInqexcl7days
+                        If MSinceMostRecentInqexcl7days < 3, the model output will decrease sharply (i.e., default risk decreases sharply)
+                        f ExternalRiskEstimate > 3, the model output will decrease slowly (i.e., default risk decreases slowly)
+                    </p>
+                </div>
+                <div class="col border-start">
+                    <h5>Figure 5</h5>
+                    <p>
+                        PercentTradesNeverDelq
+                        If PercentTradesNeverDelq < 90, the model output will decrease moderately (i.e., default risk decreases moderately)
+                        If PercentTradesNeverDelq > 90, the model output will decrease sharply (i.e., default risk decreases sharply)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="cols-sm-1"></div>
+    </div>
     
 </div>
 

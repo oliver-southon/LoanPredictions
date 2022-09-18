@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block main %}
+
+<div class="container">
+    <!-- TITLE ROW -->
+    <h1 class="display-3 text-center">Feature Details</h1>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <table class="table table-bordered text-light">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Feature Name</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>ExternalRiskEstimate</td>
+                    <td>consolidated indicator of risk markers ("Good" or "Bad")</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>MSinceOldestTradeOpen</td>
+                    <td>number of months that have elapsed since first trade</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>MSinceMostRecentTradeOpen</td>
+                    <td>number of months that have elapsed since last opened trade</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>AverageMInFile</td>
+                    <td>average months in file</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>NumSatisfactoryTrades</td>
+                    <td>number of satisfactory trades</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>NumTrades60Ever2DerogPubRec</td>
+                    <td>number of trades which are more than 60 past due</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>NumTrades90Ever2DerogPubRec</td>
+                    <td>number of trades which are more than 90 past due</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>PercentTradesNeverDelq</td>
+                    <td>percent of trades, that were not delinquent</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td>MSinceMostRecentDelq</td>
+                    <td>number of months that have elapsed since last delinquent trade</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                    <td>MaxDelq2PublicRecLast12M</td>
+                    <td>the longest delinquency period in last 12 months</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">11</th>
+                    <td>MaxDelqEver</td>
+                    <td>the longest delinquency period </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12</th>
+                    <td>NumTotalTrades</td>
+                    <td>total number of trades</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">13</th>
+                    <td>NumTradesOpeninLast12M</td>
+                    <td>number of trades opened in last 12 months</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">14</th>
+                    <td>PercentInstallTrades</td>
+                    <td>percent of installments trades</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">15</th>
+                    <td>MSinceMostRecentInqexcl7days</td>
+                    <td>months since last inquiry (excluding last 7 days)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">16</th>
+                    <td>NumInqLast6M</td>
+                    <td>number of inquiries in last 6 months</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">17</th>
+                    <td>NumInqLast6Mexcl7days</td>
+                    <td>number of inquiries in last 6 months (excluding last 7 days)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">18</th>
+                    <td>NetFractionRevolvingBurden</td>
+                    <td>revolving balance divided by credit limit</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">19</th>
+                    <td>NetFractionInstallBurden</td>
+                    <td>installment balance divided by original loan amount</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">20</th>
+                    <td>NumRevolvingTradesWBalance</td>
+                    <td>number of installment trades with balance</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">21</th>
+                    <td>NumInstallTradesWBalance</td>
+                    <td>number of trades with high utilization ratio (credit utilization ratio - the amount of a credit card balance compared to the credit limit)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">22</th>
+                    <td>PercentTradesWBalance</td>
+                    <td>percent of trades with balance</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <p>
+            To demo the model to output the following approvals, set all values to default but change 'ExternalRiskEstimate' for the following:<br><br>
+            1/3 -- 71.4<br>   
+            2/3 -- 74.2
+        </p>
+    </div>
+</div>
+
+{% endblock %}

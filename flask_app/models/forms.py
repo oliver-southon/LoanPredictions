@@ -1,16 +1,21 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField, DecimalField, DecimalRangeField, validators
+import pandas as pd
+
+fd = pd.read_csv("data/feature_details.csv", index_col="feature")
+
+feature_names = fd.index.values # Get list of feature names
 
 class LoanForm(FlaskForm):
-    f_acid = DecimalRangeField("Fixed Acidity", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=9)
-    v_acid = DecimalRangeField("Volatile Acidity", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=0.59)
-    c_acid = DecimalRangeField("Citric Acidity", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=0.83)
-    r_sugar = DecimalRangeField("Residual Sugar", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=33.2)
-    chlorides = DecimalRangeField("Volatile Acidity", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=0.178)
-    fs_dioxide = DecimalRangeField("Free Sulfur Dioxide", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=145.5)
-    ts_dioxide = DecimalRangeField("Total Sulfur Dioxide", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=224.5)
-    density = DecimalRangeField("density", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=1.01305)
-    ph = DecimalRangeField("pH", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=3.27)
-    sulphates = DecimalRangeField("Sulphates", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=0.65)
-    alcohol = DecimalRangeField("Alcohol", [validators.DataRequired()], render_kw={'style': 'width: 90%'}, default=11.1)
+    fields = []
+    for i in range(0,23):
+        name = str(feature_names[i])
+        fields.append(DecimalRangeField(name, [validators.DataRequired(), validators.NumberRange(min=fd.at[name, "min"], max=fd.at[name, "max"])], render_kw={'style': 'width: 90%', 'id': f'{i}'}, default=round(fd.at[name, "mean"],2))) 
+
+    f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15,f16,f17,f18,f19,f20,f21,f22,f23 = fields
+    submit = SubmitField('Submit')
+
+class DummyForm(FlaskForm):
+    field1 = DecimalRangeField('field1', [validators.DataRequired(), validators.NumberRange(min=0, max=5)], render_kw={'style': 'width: 90%'}, default=0) 
+    field2 = DecimalRangeField('field2', [validators.DataRequired(), validators.NumberRange(min=0, max=5)], render_kw={'style': 'width: 90%'}, default=0) 
     submit = SubmitField('Submit')

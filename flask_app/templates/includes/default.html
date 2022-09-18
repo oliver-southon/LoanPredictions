@@ -2,95 +2,152 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
         <div class="row">
-            <br>
-        </div>
-        <div class="row">
-            <div class="col-sm-5" >
-                {% if not plot_url %}
-                    <img src="../static/contact-form.png" class="img-fluid" alt="Responsive image" style="height: 100%; filter: invert(100%)">
-                {% else %}
-                    <img src="data:image/png;base64, {{ plot_url }}" class="img-fluid" alt="Responsive image" style="height: 100%">
+            <form action="" method="POST" class="form" role="form" id="paramsForm">
+                {% if 'csrf_token' in form %}
+                    {{form.csrf_token}}
                 {% endif %}
-            </div>
-            <div class="col-sm-7">
-                <form action="" method="POST" class="form" role="form">
-                    {% if 'csrf_token' in form %}
-                        {{form.csrf_token}}
-                    {% endif %}
-                    <div class="row">
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.f_acid.label }}: <span><output for="f_acid" id="f_acid">{{ form.f_acid.data }}</span></output></p>
-                            {{ form.f_acid(min=3.8, max=14.2, step=0.1, oninput="outputUpdate(value, 'f_acid')") }}
-                        </div>
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.v_acid.label }}: <span><output for="v_acid" id="v_acid">{{ form.v_acid.data }}</span></output></p>
-                            {{ form.v_acid(min=0.08, max=1.1, step=0.01, oninput="outputUpdate(value, 'v_acid')") }}
-                        </div>
+                <div class="row">
+                    <div class="form-group col-md-6 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="consolidated indicator of risk markers ('Good' or 'Bad')">{{ form.f1.label }}: <span><output for="f1" id="f1">{{ form.f1.data }}</span></output></p>
+                        {{ form.f1(step=0.1, oninput="outputUpdate(value, 'f1')") }}
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.c_acid.label }}: <span><output for="c_acid" id="c_acid">{{ form.c_acid.data }}</span></output></p>
-                            {{ form.c_acid(min=0.0, max=1.66, step=0.01, oninput="outputUpdate(value, 'c_acid')") }}
-                        </div>
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.r_sugar.label }}: <span><output for="r_sugar" id="r_sugar">{{ form.r_sugar.data }}</span></output></p>
-                            {{ form.r_sugar(min=0.6, max=65.8, step=0.1, oninput="outputUpdate(value, 'r_sugar')") }}
-                        </div>
+                    <div class="form-group col-md-6 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="percent of trades with balance">{{ form.f23.label }}: <span><output for="f23" id="f23">{{ form.f23.data }}</span></output></p>
+                        {{ form.f23(min=0.08, max=1.1, step=0.01, oninput="outputUpdate(value, 'f23')") }}
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.chlorides.label }}: <span><output for="chlorides" id="chlorides">{{ form.chlorides.data }}</span></output></p>
-                            {{ form.chlorides(min=0.009, max=0.346, step=0.001, oninput="outputUpdate(value, 'chlorides')") }}
-                        </div>
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.fs_dioxide.label }}: <span><output for="fs_dioxide" id="fs_dioxide">{{ form.fs_dioxide.data }}</span></output></p>
-                            {{ form.fs_dioxide(min=2.0, max=289.0, step=0.1, oninput="outputUpdate(value, 'fs_dioxide')") }}
-                        </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of months that have elapsed since first trade">{{ form.f2.label }}: <span><output for="f2" id="f2">{{ form.f2.data }}</span></output></p>
+                        {{ form.f2(step=0.01, oninput="outputUpdate(value, 'f2')") }}
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.ts_dioxide.label }}: <span><output for="ts_dioxide" id="ts_dioxide">{{ form.ts_dioxide.data }}</span></output></p>
-                            {{ form.ts_dioxide(min=9.0, max=440.0, step=0.1, oninput="outputUpdate(value, 'ts_dioxide')") }}
-                        </div>
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.density.label }}: <span><output for="density" id="density">{{ form.density.data }}</span></output></p>
-                            {{ form.density(min=0.98711, max=1.03898, step=0.00001, oninput="outputUpdate(value, 'density')") }}
-                        </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of months that have elapsed since last opened trade">{{ form.f3.label }}: <span><output for="f3" id="f3">{{ form.f3.data }}</span></output></p>
+                        {{ form.f3(step=0.01, oninput="outputUpdate(value, 'f3')") }}
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.ph.label }}: <span><output for="ph" id="ph">{{ form.ph.data }}</span></output></p>
-                            {{ form.ph(min=2.72, max=3.82, step=0.01, oninput="outputUpdate(value, 'ph')") }}
-                        </div>
-                        <div class="form-group col-md-6 text-center border">
-                            <p class="mt-3">{{ form.sulphates.label }}: <span><output for="sulphates" id="sulphates">{{ form.sulphates.data }}</span></output></p>
-                            {{ form.sulphates(min=0.22, max=1.08, step=0.01, oninput="outputUpdate(value, 'sulphates')") }}
-                        </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="average months in file">{{ form.f4.label }}: <span><output for="f4" id="f4">{{ form.f4.data }}</span></output></p>
+                        {{ form.f4(step=0.01, oninput="outputUpdate(value, 'f4')") }}
                     </div>
-                    <div class="row mb-3">  
-                        <div class="form-group text-center border">
-                            <p class="mt-3">{{ form.alcohol.label }}: <span><output for="alcohol" id="alcohol">{{ form.alcohol.data }}</span></output></p>
-                            {{ form.alcohol(min=8.0, max=14.2, step=0.1, oninput="outputUpdate(value, 'alcohol')") }} 
-                        </div>         
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="number of satisfactory trades">{{ form.f5.label }}: <span><output for="f5" id="f5">{{ form.f5.data }}</span></output></p>
+                        {{ form.f5(step=0.01, oninput="outputUpdate(value, 'f5')") }}
                     </div>
-                    <div class="row">
-                        <div class="col-3 container d-flex align-items-center justify-content-center">
-                            {{form.submit(class="btn btn-primary mb-3")}}
-                        </div>
-                        <div class="col-9">
-                            {% if result == 'yes' %}
-                            <div class="alert alert-success" role="alert">
-                                Loan approved!
-                            </div>
-                            {% elif result == 'no' %}
-                            <div class="alert alert-danger" role="alert">
-                                Loan denied!
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of trades which are more than 60 past due">{{ form.f6.label }}: <span><output for="f6" id="f6">{{ form.f6.data }}</span></output></p>
+                        {{ form.f6(step=0.01, oninput="outputUpdate(value, 'f6')") }}
                     </div>
-                </form>
-            </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="number of trades which are more than 90 past due">{{ form.f7.label }}: <span><output for="f7" id="f7">{{ form.f7.data }}</span></output></p>
+                        {{ form.f7(step=0.01, oninput="outputUpdate(value, 'f7')") }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="percent of trades, that were not delinquent">{{ form.f8.label }}: <span><output for="f8" id="f8">{{ form.f8.data }}</span></output></p>
+                        {{ form.f8(step=0.01, oninput="outputUpdate(value, 'f8')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="number of months that have elapsed since last delinquent trade">{{ form.f9.label }}: <span><output for="f9" id="f9">{{ form.f9.data }}</span></output></p>
+                        {{ form.f9(step=0.01, oninput="outputUpdate(value, 'f9')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="the longest delinquency period in last 12 months">{{ form.f10.label }}: <span><output for="f10" id="f10">{{ form.f10.data }}</span></output></p>
+                        {{ form.f10(step=0.01, oninput="outputUpdate(value, 'f10')") }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="the longest delinquency period">{{ form.f11.label }}: <span><output for="f11" id="f11">{{ form.f11.data }}</span></output></p>
+                        {{ form.f11(step=0.01, oninput="outputUpdate(value, 'f11')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="total number of trades">{{ form.f12.label }}: <span><output for="f12" id="f12">{{ form.f12.data }}</span></output></p>
+                        {{ form.f12(step=0.01, oninput="outputUpdate(value, 'f12')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3"data-bs-toggle="tooltip" data-bs-placement="top" title="number of trades opened in last 12 months">{{ form.f13.label }}: <span><output for="f13" id="f13">{{ form.f13.data }}</span></output></p>
+                        {{ form.f13(step=0.01, oninput="outputUpdate(value, 'f13')") }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="percent of installments trades">{{ form.f14.label }}: <span><output for="f14" id="f14">{{ form.f14.data }}</span></output></p>
+                        {{ form.f14(step=0.01, oninput="outputUpdate(value, 'f14')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="months since last inquiry (excluding last 7 days)">{{ form.f15.label }}: <span><output for="f15" id="f15">{{ form.f15.data }}</span></output></p>
+                        {{ form.f15(step=0.01, oninput="outputUpdate(value, 'f15')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of inquiries in last 6 months">{{ form.f16.label }}: <span><output for="f16" id="f16">{{ form.f16.data }}</span></output></p>
+                        {{ form.f16(step=0.01, oninput="outputUpdate(value, 'f16')") }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of inquiries in last 6 months (excluding last 7 days)">{{ form.f17.label }}: <span><output for="f17" id="f17">{{ form.f17.data }}</span></output></p>
+                        {{ form.f17(step=0.01, oninput="outputUpdate(value, 'f17')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="revolving balance divided by credit limit">{{ form.f18.label }}: <span><output for="f18" id="f18">{{ form.f18.data }}</span></output></p>
+                        {{ form.f18(step=0.01, oninput="outputUpdate(value, 'f18')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="installment balance divided by original loan amount">{{ form.f19.label }}: <span><output for="f19" id="f19">{{ form.f19.data }}</span></output></p>
+                        {{ form.f19(step=0.01, oninput="outputUpdate(value, 'f19')") }}
+                    </div>
+                </div>
+                <div class="row mb-3">  
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of revolving trades with balance">{{ form.f20.label }}: <span><output for="f20" id="f20">{{ form.f20.data }}</span></output></p>
+                        {{ form.f20(step=0.01, oninput="outputUpdate(value, 'f20')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of installment trades with balance">{{ form.f21.label }}: <span><output for="f21" id="f21">{{ form.f21.data }}</span></output></p>
+                        {{ form.f21(step=0.01, oninput="outputUpdate(value, 'f21')") }}
+                    </div>
+                    <div class="form-group col-md-4 text-center border">
+                        <p class="mt-3" data-bs-toggle="tooltip" data-bs-placement="top" title="number of trades with high utilization ratio (credit utilization ratio - the amount of a credit card balance compared to the credit limit)">{{ form.f22.label }}: <span><output for="f22" id="f22">{{ form.f22.data }}</span></output></p>
+                        {{ form.f22(step=0.01, oninput="outputUpdate(value, 'f22')") }}
+                    </div>        
+                </div>
+                <div class="row">
+                    <div class="col-3 container d-flex align-items-center justify-content-center">
+                        <p class="mb-3 text-primary"><i class="bi bi-caret-right"></i><i class="bi bi-caret-right"></i><i class="bi bi-caret-right"></i>&nbsp&nbsp&nbsp</p>
+                        {{form.submit(class="btn btn-primary mb-3")}}
+                    </div>
+                    <div class="col-9">
+                        {% if result == 'yes' %}
+                        <div class="alert alert-success" role="alert">
+                            Loan approved!
+                        </div>
+                        {% elif result == 'no' %}
+                        <div class="alert alert-danger" role="alert">
+                            Loan denied!
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-secondary" style="width: 18rem;" onclick="resetVals()">
+        <em><i class="bi bi-arrow-clockwise"></i> Reset Values to default</em>
+    </div>
+    </div>
 </div>
+
+<script>
+    function outputUpdate(val, id) {
+        document.querySelector("[id=" + CSS.escape(id) + "]").value = val;
+    }
+    function resetVals() {
+        document.getElementById("paramsForm").reset();
+    }
+</script>
